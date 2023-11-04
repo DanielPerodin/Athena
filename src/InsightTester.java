@@ -1,4 +1,3 @@
-
 /**
  * This program takes data from a user's Chess.com account and gives them insights based on that data. 
  * This program also allows users to easily transcribe their chess games, and will save the game to a .txt file. 
@@ -584,5 +583,10 @@ public class InsightTester
             System.out.println();
             System.out.println("Unfortunately that is not a valid input.");
         }
+
+        in.close();
+        input.close();
+        input2.close();
+        input3.close();
     }
 }
