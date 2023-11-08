@@ -90,6 +90,10 @@ public class InsightTester
         Scanner input2 = new Scanner(System.in);
         Scanner input3 = new Scanner(System.in);
         
+        System.out.println("Welcome to Athena!");
+        System.out.println("Please input the directory path to read and write to: ");
+        String directoryPath = in.nextLine();
+
         System.out.println("Which service would you like to use?: ");
         System.out.println("[A] Chess.com analysis");
         System.out.println("[B] Over the board recording");
@@ -101,7 +105,6 @@ public class InsightTester
         
             System.out.println("What is the name of the .txt file you have uploaded? (please make sure to include the .txt in the name): ");
             String dotText = input3.nextLine();
-        
         
             File fileName = new File(dotText);
             Scanner inFile = new Scanner(fileName);
@@ -120,6 +123,8 @@ public class InsightTester
                     break;
                 }
             }
+
+            inFile.close();
     
             int latestElo  = Integer.parseInt(readLatestElo);
     
@@ -128,7 +133,6 @@ public class InsightTester
     
             while( inFile2.hasNext() )
             {
-        
                 String token = inFile2.nextLine( );
         
                 //find numGames
@@ -137,6 +141,7 @@ public class InsightTester
                     String SecondaryToken = inFile2.nextLine( );
                     if (SecondaryToken.equals(username))
                     {
+                        //Need to consume 3 more lines
                         String TertiaryToken = inFile2.nextLine( );
                         String FourthToken = inFile2.nextLine( );
                         String FifthToken = inFile2.nextLine( );
@@ -147,6 +152,7 @@ public class InsightTester
                     //this assumes that the user has typed in the username with 0 mistakes
                     else if (1 > 0)
                     {
+                        //Need to consumer 3 more lines
                         String tokenThree = inFile2.nextLine( );
                         String tokenFour = inFile2.nextLine( );
                         String tokenFive = inFile2.nextLine( );
@@ -157,6 +163,9 @@ public class InsightTester
                     }
                     numGames++;
                 }
+
+                inFile2.close();
+
             }
             //prompt user for desired elo, store value in an int, have message ready if they put it incorrectly
             System.out.println();    
@@ -167,7 +176,7 @@ public class InsightTester
             //ask user if there any players which they would like to exclude from the data because they play unrated games with that player
             
             //round this value up!!!!! Account for when win % is less than 50%!!! Cast (wins/numGames) to a double!!
-            double  winPercentage = wins / (numGames * 1.0) ;
+            double winPercentage = wins / (numGames * 1.0) ;
             int eloDifference = desiredElo - latestElo;
             if (winPercentage > 0.5)
             {
@@ -205,9 +214,9 @@ public class InsightTester
             PrintWriter writer2 = null;
             if (check1.exists() == false)
             {
-                File playerProfileFile = new File("C:\\Users\\perod\\Athena\\" + name + ".txt");
+                File playerProfileFile = new File(directoryPath + name + ".txt");
                 playerProfileFile.createNewFile();
-                writer2 = new PrintWriter("C:\\Users\\perod\\Athena\\" + name + ".txt");   
+                writer2 = new PrintWriter(directoryPath + name + ".txt");   
                 writer2.println("Games:");
                 writer2.println();
                 writer2.println("Wins:");
@@ -227,18 +236,17 @@ public class InsightTester
                 writer2.close();//here
             }
 
-            Scanner inFile4 = new Scanner("C:\\Users\\perod\\Athena\\" + name + ".txt");
-
+            
             System.out.println("Input your opponent's name: ");
             String oppName = in.next();
-    
+            
             File check2 = new File (oppName + ".txt");
             PrintWriter writer3 = null;
             if (check2.exists() == false)
             {
-                File playerProfileFile = new File("C:\\Users\\perod\\Athena\\" + oppName + ".txt");
+                File playerProfileFile = new File(directoryPath + oppName + ".txt");
                 playerProfileFile.createNewFile();
-                writer3 = new PrintWriter("C:\\Users\\perod\\Athena\\" + oppName + ".txt");
+                writer3 = new PrintWriter(directoryPath + oppName + ".txt");
                 writer3.println("Games:");
                 writer3.println();
                 writer3.println("Wins:");
@@ -257,16 +265,15 @@ public class InsightTester
                 writer3.println();
                 writer3.close();
             }
-
-            Scanner inFile5 = new Scanner("C:\\Users\\perod\\Athena\\" + oppName + ".txt");    
-
+            
+            
             //in case multiple games happen between the same people in one day
             int r = (int)(Math.random() * (899001) + 1000);
             String randomNum = String.valueOf(r);
             String newFileName = name + " vs " + oppName + "-" + theDate + "-" + randomNum + ".txt";
-            File theFile = new File("C:\\Users\\perod\\Athena\\" + newFileName);   
-            PrintWriter writer = new PrintWriter("C:\\Users\\perod\\Athena\\" + newFileName);
-    
+            File theFile = new File(directoryPath + newFileName);   
+            PrintWriter writer = new PrintWriter(directoryPath + newFileName);
+            
             System.out.println("Who is playing as white?: ");
             String whoWhite = in.next();
             String whoBlack = "";
@@ -278,7 +285,10 @@ public class InsightTester
             
             PrintWriter writer5 = null;
             PrintWriter writer6 = null; 
-   
+            
+            Scanner inFile4 = new Scanner(directoryPath + name + ".txt");
+            Scanner inFile5 = new Scanner(directoryPath + oppName + ".txt");    
+            
             if (whoWhite.equalsIgnoreCase(name))
             {
                 whoBlack = oppName;
@@ -294,7 +304,7 @@ public class InsightTester
                             else if (lineReader.equals("#")){blackGames1++;}
                             else 
                             {
-                                writer5 = new PrintWriter("C:\\Users\\perod\\Athena\\" + name + ".txt");
+                                writer5 = new PrintWriter(directoryPath + name + ".txt");
                                 writer5.println("*");
                                 writer5.println();
                             }
@@ -318,7 +328,7 @@ public class InsightTester
                             else if (lineReader.equals("#")){blackGames1++;}
                             else
                             {
-                                writer6 = new PrintWriter("C:\\Users\\perod\\Athena\\" + oppName + ".txt");
+                                writer6 = new PrintWriter(directoryPath + oppName + ".txt");
                                 writer6.println("*");
                                 writer6.println();
                             }
@@ -326,6 +336,8 @@ public class InsightTester
                     }
                 }
             } 
+            inFile4.close();
+            inFile5.close();
             //find the index of the black game coordinate in the 'Games' line for the oppName.txt doc and add 1
             if(writer5 != null){writer5.close();}
             if(writer6 != null){writer6.close();}
@@ -570,7 +582,6 @@ public class InsightTester
         {
             System.out.println();
             System.out.println("Please input your name: ");
-            String theName = in.next();
 
             //search Athena for .txt files with the user's name in the file name
             //present the games by the file names to the user
