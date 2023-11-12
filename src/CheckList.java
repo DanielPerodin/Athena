@@ -1,17 +1,11 @@
 
 /**
- * Write a description of class CheckList here.
+ * This class checks the game and determines the opening that was played.
  *
- * @author (Daniel Perodin)
- * @version (5/9/2023)
+ * @author Daniel Perodin
+ * @version 5/9/2023
  */
-import java.util.List;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.File;
-import java.util.Scanner;
 public class CheckList
 {
     
