@@ -1,0 +1,2 @@
+Please type the directory to save game text to:
+/Users/sunnyyou/Documents/Athena/game_text/
