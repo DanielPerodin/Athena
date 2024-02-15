@@ -15,7 +15,7 @@ import java.io.PrintWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class InsightTester
+public class Athena
 {
     public static void main(String[] args) throws IOException
     {
@@ -91,8 +91,6 @@ public class InsightTester
         Scanner input3 = new Scanner(System.in);
         
         System.out.println("Welcome to Athena!");
-        System.out.println("Please input the directory path to read and write to: ");
-        String directoryPath = in.nextLine();
 
         System.out.println("Which service would you like to use?: ");
         System.out.println("[A] Chess.com analysis");
@@ -204,7 +202,10 @@ public class InsightTester
         }
         else if (service.equalsIgnoreCase("B"))
         {
-            System.out.println();
+            Scanner inFile = new Scanner(new File("../config.txt"));
+            inFile.nextLine();
+            String directoryPath = inFile.nextLine();
+            System.out.println(directoryPath);
             System.out.println("Input today's date (mm.dd.yyyy): ");
             String theDate = in.next();
             System.out.println("Input your name: ");
@@ -235,7 +236,6 @@ public class InsightTester
                 writer2.println();
                 writer2.close();//here
             }
-
             
             System.out.println("Input your opponent's name: ");
             String oppName = in.next();
@@ -270,7 +270,7 @@ public class InsightTester
             //in case multiple games happen between the same people in one day
             int r = (int)(Math.random() * (899001) + 1000);
             String randomNum = String.valueOf(r);
-            String newFileName = name + " vs " + oppName + "-" + theDate + "-" + randomNum + ".txt";
+            String newFileName = name + " vs " + oppName + "-" + theDate + "-" + randomNum + ".pgn";
             File theFile = new File(directoryPath + newFileName);   
             PrintWriter writer = new PrintWriter(directoryPath + newFileName);
             

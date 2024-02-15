@@ -1,2 +1,4 @@
 *.txt
-game_text/
+!config.txt
+*.pgn
+.DS_Store

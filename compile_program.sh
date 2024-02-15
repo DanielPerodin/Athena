@@ -1,7 +1,7 @@
 #!/bin/bash
 
 cd src
-javac InsightTester.java
+javac Athena.java
 for f in *.java; do
     filename="${f%.*}"
 done
