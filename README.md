@@ -4,4 +4,4 @@ Additionally, data from the game (the opening used, who won/lost, who played as 
 will be stored to another .txt file which contains that player's "profile" 
 based on all other games they have transcribed using this program if they have used it before.
 
-When typing in the directory to write to, please include the ending separator character for your operating system.
+When typing in the directory to write to in the config.txt file, please include the ending separator character for your operating system.
